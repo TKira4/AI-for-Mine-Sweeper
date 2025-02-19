@@ -8,6 +8,7 @@ class Board:
         self.width = width
         self.height = height
         self.num_mines = num_mines
+        
         #dung mang 2 chieu de luu toa do
         self.grid = [[0 for _ in range(width)] for _ in range(height)]
         self.revealed = [[False for _ in range(width)] for _ in range(height)]
@@ -24,6 +25,7 @@ class Board:
                 self.grid[x][y] = -1
                 mines_placed += 1
 
+    #tinh so luong bomb xung quanh dua tren so cua o
     def calculate_numbers(self):
         for x in range(self.height):
             for y in range(self.width):
@@ -37,6 +39,7 @@ class Board:
                             count += 1
                 self.grid[x][y] = count
 
+    #ve bang
     def draw_board(self, window):
         for x in range(self.height):
             for y in range(self.width):
@@ -58,9 +61,10 @@ class Board:
                         text = font.render(str(self.grid[x][y]), True, (0, 0, 0))
                         window.blit(text, (y * CELL_SIZE + 10, x * CELL_SIZE + 5))
 
+    #mo o
     def reveal(self, x, y):
         if self.revealed[x][y] or self.flags[x][y]:
-            return  #neu o da mo thi se khong lam gi
+            return  #neu o da mo hoac co flag thi se khong lam gi
 
         stack = [(x, y)]
         self.revealed[x][y] = True  #danh dau khi dua vao stack

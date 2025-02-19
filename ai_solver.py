@@ -57,7 +57,7 @@ class AISolver:
                     #neu da cam flag du voi so bomb tuong ung thi co the mo nhung o con lai
                     if len(flagged) == self.board.grid[x][y]:
                         for nx, ny in hidden:
-                            if not self.board.revealed[nx][ny]:
+                            if not self.board.revealed[nx][ny] and not self.board.flags[nx][ny]:
                                 self.board.reveal(nx, ny)
                                 print(f"--Open cell: --({nx}, {ny})")
                                 self.update_display()
@@ -106,5 +106,7 @@ class AISolver:
 
         if not moves_made:
             print("❌Khong du du kien de hanh dong tiep!!!")
+            return False
         else:
             print("✅AI da giai xong bai toan!")
+            return True
