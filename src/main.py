@@ -1,6 +1,10 @@
 import pygame   #dung pygame de visualize
+import time     #dung de do hieu nang
+import tracemalloc  #dung de do hieu nang
 from board import Board
 from ai_solver import AISolver
+
+tracemalloc.start()
 
 #khoi tao pygame
 pygame.init()
@@ -39,11 +43,16 @@ def main():
                     ai_running = not ai_running  
 
         if ai_running:
+            start_time = time.time()
             #goi ham de AI hanh dong va cap nhat board
             state = ai_solver.solve() #tra ve state de khong goi giai thuat nua
             ai_running = state
+            end_time = time.time()
+            print(f"Thời gian chạy: {(end_time - start_time)/10*3:.3f} giây")
         clock.tick(30)
-
+    current = tracemalloc.get_traced_memory()
+    print(f"Bộ nhớ hiện tại: {current / 1024 / 1024:.2f} MB")
+    tracemalloc.stop()
     pygame.quit()
 
 if __name__ == "__main__":
