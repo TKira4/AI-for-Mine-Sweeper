@@ -23,6 +23,11 @@ def main():
         #ve background va board
         screen.fill((200, 200, 200))
         board.draw_board(screen)
+        if not ai_running:
+            font = pygame.font.Font(None, 32)
+            text = font.render("Press Space to Start", True, (255, 255, 255))
+            text_rect = text.get_rect(center=(WIDTH * CELL_SIZE // 2, HEIGHT * CELL_SIZE * 1.1))
+            screen.blit(text, text_rect)
         pygame.display.flip()
 
         for event in pygame.event.get():
