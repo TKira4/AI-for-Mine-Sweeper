@@ -50,8 +50,11 @@ def main():
             end_time = time.time()
             print(f"Thời gian chạy: {(end_time - start_time)/10*3:.3f} giây")
         clock.tick(30)
-    current = tracemalloc.get_traced_memory()
+    #do bo nho tieu thu
+    current, peak = tracemalloc.get_traced_memory()
     print(f"Bộ nhớ hiện tại: {current / 1024 / 1024:.2f} MB")
+    print(f"Bộ nhớ đỉnh: {peak / 1024 / 1024:.2f} MB")
+
     tracemalloc.stop()
     pygame.quit()
 
